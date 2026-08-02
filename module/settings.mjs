@@ -114,6 +114,27 @@ export function registerSettings() {
     choices: { wwn: "WWN.Setting.AttributeModWWN", bx: "WWN.Setting.AttributeModBX" },
   });
 
+  registerWwnSetting("attributeMethod", {
+    name: "WWN.Setting.AttributeMethod",
+    hint: "WWN.Setting.AttributeMethodHint",
+    scope: "world",
+    type: String,
+    default: "table",
+    choices: {
+      "raw-order": "WWN.chargen.method.rawOrder",
+      "raw-array": "WWN.chargen.method.rawArray",
+      table: "WWN.chargen.method.table",
+    },
+  });
+
+  registerWwnSetting("clementGm", {
+    name: "WWN.Setting.ClementGm",
+    hint: "WWN.Setting.ClementGmHint",
+    scope: "world",
+    type: Boolean,
+    default: false,
+  });
+
   registerWwnSetting("saveSet", {
     name: "WWN.Setting.SaveSet",
     hint: "WWN.Setting.SaveSetHint",
