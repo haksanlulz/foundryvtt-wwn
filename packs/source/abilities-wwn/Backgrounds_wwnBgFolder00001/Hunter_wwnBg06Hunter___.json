@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg06Hunter___",
+  "name": "Hunter",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 600,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg06Hunter___"
+    }
+  },
+  "_key": "!items!wwnBg06Hunter___",
+  "system": {
+    "description": "",
+    "freeSkill": "Shoot-0",
+    "quickSkills": [
+      "Survive-0",
+      "Sneak-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Exert",
+      "Heal",
+      "Notice",
+      "Ride",
+      "Shoot",
+      "Sneak",
+      "Survive"
+    ],
+    "tableRoll": 6
+  },
+  "ownership": {
+    "default": 0
+  }
+}

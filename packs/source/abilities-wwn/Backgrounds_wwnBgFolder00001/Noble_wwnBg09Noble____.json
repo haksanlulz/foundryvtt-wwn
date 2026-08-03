@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg09Noble____",
+  "name": "Noble",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 900,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg09Noble____"
+    }
+  },
+  "_key": "!items!wwnBg09Noble____",
+  "system": {
+    "description": "",
+    "freeSkill": "Lead-0",
+    "quickSkills": [
+      "Connect-0",
+      "Administer-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Mental",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Any Combat",
+      "Connect",
+      "Convince",
+      "Know",
+      "Lead",
+      "Notice",
+      "Ride"
+    ],
+    "tableRoll": 9
+  },
+  "ownership": {
+    "default": 0
+  }
+}

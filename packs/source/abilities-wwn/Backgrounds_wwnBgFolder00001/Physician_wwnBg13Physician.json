@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg13Physician",
+  "name": "Physician",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1300,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg13Physician"
+    }
+  },
+  "_key": "!items!wwnBg13Physician",
+  "system": {
+    "description": "",
+    "freeSkill": "Heal-0",
+    "quickSkills": [
+      "Know-0",
+      "Notice-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Mental",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Connect",
+      "Craft",
+      "Heal",
+      "Know",
+      "Notice",
+      "Convince",
+      "Trade"
+    ],
+    "tableRoll": 13
+  },
+  "ownership": {
+    "default": 0
+  }
+}

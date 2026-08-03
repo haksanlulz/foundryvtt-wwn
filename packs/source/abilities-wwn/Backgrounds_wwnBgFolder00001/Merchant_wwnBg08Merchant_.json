@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg08Merchant_",
+  "name": "Merchant",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 800,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg08Merchant_"
+    }
+  },
+  "_key": "!items!wwnBg08Merchant_",
+  "system": {
+    "description": "",
+    "freeSkill": "Trade-0",
+    "quickSkills": [
+      "Convince-0",
+      "Connect-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Mental",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Any Combat",
+      "Connect",
+      "Convince",
+      "Craft",
+      "Know",
+      "Notice",
+      "Trade"
+    ],
+    "tableRoll": 8
+  },
+  "ownership": {
+    "default": 0
+  }
+}

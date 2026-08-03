@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg12Performer",
+  "name": "Performer",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1200,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg12Performer"
+    }
+  },
+  "_key": "!items!wwnBg12Performer",
+  "system": {
+    "description": "",
+    "freeSkill": "Perform-0",
+    "quickSkills": [
+      "Convince-0",
+      "Connect-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Physical",
+      "+2 Physical",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Exert",
+      "Notice",
+      "Perform",
+      "Perform",
+      "Sneak",
+      "Convince"
+    ],
+    "tableRoll": 12
+  },
+  "ownership": {
+    "default": 0
+  }
+}

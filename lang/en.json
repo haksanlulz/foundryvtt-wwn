@@ -1605,5 +1605,6 @@
   "WWN.chargen.error.outOfRange": "Attribute scores run from 3 to 18.",
   "WWN.chargen.error.incomplete": "All six attributes need a score.",
   "WWN.chargen.error.gmOnly": "Only a GM can lift the method restrictions.",
-  "WWN.dialog.generateScoresMethod": "Generate scores ({method})"
+  "WWN.dialog.generateScoresMethod": "Generate scores ({method})",
+  "TYPES.Item.background": "Background"
 }

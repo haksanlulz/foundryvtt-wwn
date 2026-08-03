@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg02Barbarian",
+  "name": "Barbarian",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 200,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg02Barbarian"
+    }
+  },
+  "_key": "!items!wwnBg02Barbarian",
+  "system": {
+    "description": "",
+    "freeSkill": "Survive-0",
+    "quickSkills": [
+      "Any Combat-0",
+      "Notice-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Exert",
+      "Lead",
+      "Notice",
+      "Punch",
+      "Sneak",
+      "Survive"
+    ],
+    "tableRoll": 2
+  },
+  "ownership": {
+    "default": 0
+  }
+}

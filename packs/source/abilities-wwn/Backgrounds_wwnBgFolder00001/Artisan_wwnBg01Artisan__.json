@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg01Artisan__",
+  "name": "Artisan",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 100,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg01Artisan__"
+    }
+  },
+  "_key": "!items!wwnBg01Artisan__",
+  "system": {
+    "description": "",
+    "freeSkill": "Craft-0",
+    "quickSkills": [
+      "Trade-0",
+      "Connect-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Connect",
+      "Convince",
+      "Craft",
+      "Craft",
+      "Exert",
+      "Know",
+      "Notice",
+      "Trade"
+    ],
+    "tableRoll": 1
+  },
+  "ownership": {
+    "default": 0
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg19Thug_____",
+  "name": "Thug",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1900,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg19Thug_____"
+    }
+  },
+  "_key": "!items!wwnBg19Thug_____",
+  "system": {
+    "description": "",
+    "freeSkill": "Any Combat-0",
+    "quickSkills": [
+      "Convince-0",
+      "Connect-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Physical",
+      "+2 Physical",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Any Combat",
+      "Connect",
+      "Convince",
+      "Exert",
+      "Notice",
+      "Sneak",
+      "Survive"
+    ],
+    "tableRoll": 19
+  },
+  "ownership": {
+    "default": 0
+  }
+}

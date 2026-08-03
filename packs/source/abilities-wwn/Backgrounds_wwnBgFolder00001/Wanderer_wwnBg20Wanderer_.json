@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg20Wanderer_",
+  "name": "Wanderer",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 2000,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg20Wanderer_"
+    }
+  },
+  "_key": "!items!wwnBg20Wanderer_",
+  "system": {
+    "description": "",
+    "freeSkill": "Survive-0",
+    "quickSkills": [
+      "Sneak-0",
+      "Notice-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Notice",
+      "Perform",
+      "Ride",
+      "Sneak",
+      "Survive",
+      "Work"
+    ],
+    "tableRoll": 20
+  },
+  "ownership": {
+    "default": 0
+  }
+}
