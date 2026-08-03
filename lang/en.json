@@ -1606,5 +1606,13 @@
   "WWN.chargen.error.incomplete": "All six attributes need a score.",
   "WWN.chargen.error.gmOnly": "Only a GM can lift the method restrictions.",
   "WWN.dialog.generateScoresMethod": "Generate scores ({method})",
-  "TYPES.Item.background": "Background"
+  "TYPES.Item.background": "Background",
+  "WWN.Background.Skills": "Granted Skills",
+  "WWN.Background.FreeSkill": "Free Skill",
+  "WWN.Background.QuickSkills": "Quick Skills",
+  "WWN.Background.QuickSkillsHint": "The two skills granted by the quick chargen route. Comma separated.",
+  "WWN.Background.Growth": "Growth Table",
+  "WWN.Background.Learning": "Learning Table",
+  "WWN.Background.TableRoll": "d20 Roll",
+  "WWN.Background.TableHint": "Order is the roll: first entry is a 1. Repeats are intentional — they weight the die."
 }

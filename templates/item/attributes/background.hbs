@@ -1,0 +1,69 @@
+{{!-- Background attributes: chargen grants, WWN Deluxe pp. 11-17.
+      Growth and Learning are ordered d6/d8 tables — position IS the roll, and repeats are
+      how the book weights the die, so they are shown in order and never sorted. --}}
+<section class="tab {{tab.cssClass}}" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+  <div class="wwn-attributes-body">
+    <div class="wwn-form-stack">
+
+      <div class="wwn-form-panel">
+        <div class="wwn-section-header">{{localize "WWN.Background.Skills"}}</div>
+        <div class="wwn-form-panel-fields">
+          <div class="form-group">
+            <label>{{localize "WWN.Background.FreeSkill"}}</label>
+            <div class="form-fields">
+              <input type="text" name="system.freeSkill" value="{{system.freeSkill}}" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>{{localize "WWN.Background.TableRoll"}}</label>
+            <div class="form-fields">
+              <input type="number" name="system.tableRoll" value="{{system.tableRoll}}" min="1" max="20"
+                data-dtype="Number" />
+            </div>
+          </div>
+          <div class="form-group wwn-form-span">
+            <label title="{{localize 'WWN.Background.QuickSkillsHint'}}">{{localize "WWN.Background.QuickSkills"}}</label>
+            <div class="form-fields">
+              <input type="text" name="system.quickSkills" value="{{join system.quickSkills ", "}}" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wwn-form-panel">
+        <div class="wwn-section-header">{{localize "WWN.Background.Growth"}}</div>
+        <div class="wwn-form-panel-fields">
+          <div class="form-group wwn-form-span">
+            <label title="{{localize 'WWN.Background.TableHint'}}">d6</label>
+            <div class="form-fields">
+              <input type="text" name="system.growth" value="{{join system.growth ", "}}" />
+            </div>
+          </div>
+          {{#if system.growth.length}}
+          <ol class="wwn-table-preview">
+            {{#each system.growth}}<li>{{this}}</li>{{/each}}
+          </ol>
+          {{/if}}
+        </div>
+      </div>
+
+      <div class="wwn-form-panel">
+        <div class="wwn-section-header">{{localize "WWN.Background.Learning"}}</div>
+        <div class="wwn-form-panel-fields">
+          <div class="form-group wwn-form-span">
+            <label title="{{localize 'WWN.Background.TableHint'}}">d8</label>
+            <div class="form-fields">
+              <input type="text" name="system.learning" value="{{join system.learning ", "}}" />
+            </div>
+          </div>
+          {{#if system.learning.length}}
+          <ol class="wwn-table-preview">
+            {{#each system.learning}}<li>{{this}}</li>{{/each}}
+          </ol>
+          {{/if}}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
