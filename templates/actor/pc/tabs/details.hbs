@@ -66,6 +66,13 @@
         <div class="wwn-section-header">{{localize "WWN.category.config"}}</div>
         <div class="wwn-form-panel-fields">
           <div class="form-group">
+            <label title="{{localize 'WWN.Profile.ChargenHint'}}">{{localize "WWN.Profile.Chargen"}}</label>
+            <div class="form-fields">
+              <input type="checkbox" name="system.details.chargen" {{checked system.details.chargen}}
+                data-dtype="Boolean" />
+            </div>
+          </div>
+          <div class="form-group">
             <label title="{{localize 'WWN.AB'}}">{{localize "WWN.ABShort"}}</label>
             <div class="form-fields">
               <input type="number" value="{{system.combat.ab}}" data-dtype="Number" disabled

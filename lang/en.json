@@ -1614,5 +1614,7 @@
   "WWN.Background.Growth": "Growth Table",
   "WWN.Background.Learning": "Learning Table",
   "WWN.Background.TableRoll": "d20 Roll",
-  "WWN.Background.TableHint": "Order is the roll: first entry is a 1. Repeats are intentional — they weight the die."
+  "WWN.Background.TableHint": "Order is the roll: first entry is a 1. Repeats are intentional — they weight the die.",
+  "WWN.Profile.Chargen": "Character Creation",
+  "WWN.Profile.ChargenHint": "While checked, the attribute generator is offered on the Main tab. Untick when the character is finished."
 }

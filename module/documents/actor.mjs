@@ -13,6 +13,23 @@ import { getPrimarySkillData } from "../helpers/skill-set.mjs";
 
 export class WwnActor extends Actor {
   /**
+   * Is this PC in character-creation mode?
+   *
+   * Backed by the `Character Creation` checkbox on the Details tab, not inferred from
+   * the scores: a rolled character can legitimately land on six 10s, and guessing would
+   * both mis-fire there and give the player no way to re-open the generator later.
+   *
+   * ⚠️ This method was CALLED in two places and defined nowhere. `actor.isNew?.()`
+   * returned undefined, `?? false` made it false, and the generator button never
+   * rendered for anyone on any character — the dialog was unreachable from the sheet.
+   * @returns {boolean}
+   */
+  isNew() {
+    if (this.type !== "character") return false;
+    return this.system?.details?.chargen === true;
+  }
+
+  /**
    * Migrate embedded items (art→power, etc.) and legacy system shapes before
    * schema validation. Actor types stay `character`/`monster` (pc/npc are
    * reverse aliases only — never remapped here).

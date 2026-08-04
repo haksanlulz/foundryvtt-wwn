@@ -35,6 +35,9 @@ export default class WwnPc extends WwnActorBase {
       alignment: new fields.StringField({ required: true, blank: true }),
       level: new fields.NumberField({ ...requiredInteger, initial: 1, min: 1 }),
       notes: new fields.HTMLField({ required: true, blank: true }),
+      /** Character-creation mode: shows the generator on the main tab. Ticked by
+       *  default so a freshly made PC offers it, unticked once chargen is done. */
+      chargen: new fields.BooleanField({ required: true, initial: true }),
       /** Retainer loyalty (2d6 under); unused for non-retainers. */
       morale: new fields.NumberField({ ...requiredInteger, initial: 7 }),
       renown: new fields.SchemaField({
