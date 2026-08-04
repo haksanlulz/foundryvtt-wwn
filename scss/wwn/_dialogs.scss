@@ -1,8 +1,49 @@
 /* Dialog / ApplicationV2 windows opened via showWwnDialog and themed apps */
 
+/* Was `flex: 0 0 50px`, which fit a lone number input. The row now carries a value
+   select plus the RAW 14-swap button, and at 50px the button wrapped underneath and
+   rendered as a stray "14" floating under each attribute. */
 .wwn-app--creator .attribute-list .form-fields,
 .wwn-dialog--creator .attribute-list .form-fields {
-  flex: 0 0 50px;
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.wwn-app--creator .attribute-list .form-fields select.assign-select,
+.wwn-dialog--creator .attribute-list .form-fields select.assign-select {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.wwn-app--creator .attribute-list .swap-14,
+.wwn-dialog--creator .attribute-list .swap-14 {
+  flex: 0 0 auto;
+  min-width: 30px;
+  padding: 1px 5px;
+  border: 1px solid var(--wwn-border);
+  border-radius: 3px;
+  font-size: 12px;
+  line-height: 18px;
+  text-align: center;
+  opacity: .7;
+  cursor: pointer;
+}
+.wwn-app--creator .attribute-list .swap-14:hover,
+.wwn-dialog--creator .attribute-list .swap-14:hover {
+  opacity: 1;
+}
+.wwn-app--creator .attribute-list .swap-14.active,
+.wwn-dialog--creator .attribute-list .swap-14.active {
+  opacity: 1;
+  font-weight: bold;
+  border-color: currentColor;
+}
+.wwn-app--creator .attribute-list .clear-swap,
+.wwn-dialog--creator .attribute-list .clear-swap {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  text-align: right;
 }
 .wwn-app--creator .attribute-list .form-fields input,
 .wwn-dialog--creator .attribute-list .form-fields input {

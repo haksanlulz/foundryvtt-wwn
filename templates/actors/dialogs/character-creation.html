@@ -68,14 +68,21 @@
                     {{/if}}
 
                     {{#if ../canSwap}}
-                    <a data-action="swapFourteen" title="{{localize 'WWN.chargen.swapHint'}}"
+                    {{!-- RAW p.8: after the scores are set, ONE of them may be replaced
+                          with a flat 14. Rendered per row so the target is the row you
+                          click, and marked active on whichever row currently holds it. --}}
+                    <a data-action="swapFourteen" role="button"
+                       aria-label="{{localize 'WWN.chargen.swapAria'}}"
+                       title="{{#if a.swapped}}{{localize 'WWN.chargen.swapActive'}}{{else}}{{localize 'WWN.chargen.swapHint'}}{{/if}}"
                        class="swap-14 {{#if a.swapped}}active{{/if}}">14</a>
                     {{/if}}
                 </div>
             </div>
             {{/each}}
             {{#if swapKey}}
-            <a data-action="clearSwap" class="clear-swap">{{localize "WWN.chargen.clearSwap"}}</a>
+            <a data-action="clearSwap" class="clear-swap" role="button">
+              <i class="fas fa-rotate-left"></i> {{localize "WWN.chargen.clearSwap"}}
+            </a>
             {{/if}}
         </div>
 

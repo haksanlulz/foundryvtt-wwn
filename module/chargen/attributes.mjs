@@ -65,7 +65,9 @@ export const METHODS = {
   },
 };
 
-export const DEFAULT_METHOD = "table";
+/** Operator ruling 2026-08-03: the book's method is the default; the house
+ *  method is opt-in per world. */
+export const DEFAULT_METHOD = "raw-order";
 
 /**
  * Resolve a method's rules against the GM options in play.
@@ -192,6 +194,47 @@ export function assign(state, order) {
   const slots = {};
   wanted.forEach((key, i) => { assignment[key] = values[i]; slots[key] = i; });
   return { ok: true, state: { ...state, assignment, slots, swapKey: null } };
+}
+
+/**
+ * Move one ability onto a set position, swapping with whoever already holds it.
+ *
+ * Rejecting the collision instead of swapping made rearranging impossible: every swap
+ * passes through a state where two abilities want the same position, so the guard
+ * forbade the only operation it was guarding.
+ *
+ * @param {object} state
+ * @param {string} ability  the ability the player just changed
+ * @param {number} slot     the set position they chose
+ */
+export function placeAt(state, ability, slot) {
+  if (state.chosenSet === null) return { ok: false, reason: "WWN.chargen.error.noSet", state };
+  const m = effectiveMethod(state.method, { clementGm: state.clementGm });
+  if (!m.freeArrange && !state.override) {
+    return { ok: false, reason: "WWN.chargen.error.orderLocked", state };
+  }
+  const values = state.sets[state.chosenSet];
+  if (!ABILITY_ORDER.includes(ability)) {
+    return { ok: false, reason: "WWN.chargen.error.badAbility", state };
+  }
+  if (!Number.isInteger(slot) || slot < 0 || slot >= values.length) {
+    return { ok: false, reason: "WWN.chargen.error.badOrder", state };
+  }
+
+  const slots = { ...state.slots };
+  if (Object.keys(slots).length !== ABILITY_ORDER.length) {
+    // Nothing placed yet — fall back to roll order, then move.
+    ABILITY_ORDER.forEach((k, i) => { slots[k] = i; });
+  }
+  const from = slots[ability];
+  if (from === slot) return { ok: true, state };
+  const displaced = ABILITY_ORDER.find((k) => k !== ability && slots[k] === slot);
+  slots[ability] = slot;
+  if (displaced !== undefined) slots[displaced] = from;
+
+  const order = new Array(values.length);
+  for (const key of ABILITY_ORDER) order[slots[key]] = key;
+  return assign(state, order);
 }
 
 /**

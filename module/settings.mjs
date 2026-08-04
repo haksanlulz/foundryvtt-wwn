@@ -119,7 +119,7 @@ export function registerSettings() {
     hint: "WWN.Setting.AttributeMethodHint",
     scope: "world",
     type: String,
-    default: "table",
+    default: "raw-order",
     choices: {
       "raw-order": "WWN.chargen.method.rawOrder",
       "raw-array": "WWN.chargen.method.rawArray",

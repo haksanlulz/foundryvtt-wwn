@@ -19,6 +19,7 @@ import {
   recordSets,
   chooseSet,
   assign,
+  placeAt,
   applyFourteenSwap,
   clearSwap,
   setManual,
@@ -151,7 +152,7 @@ export class WwnCharacterCreator extends HandlebarsApplicationMixin(ApplicationV
       // would otherwise select the wrong one and quietly swap two abilities.
       const slot = this.chargen.slots[sel.dataset.ability];
       if (Number.isInteger(slot)) sel.value = String(slot);
-      sel.addEventListener("change", () => this.#onAssignChanged());
+      sel.addEventListener("change", (ev) => this.#onAssignChanged(ev));
     });
     this.element.querySelectorAll("input.manual-score").forEach((input) => {
       input.addEventListener("change", (ev) => this.#onManualChanged(ev));
@@ -180,27 +181,14 @@ export class WwnCharacterCreator extends HandlebarsApplicationMixin(ApplicationV
   }
 
   /**
-   * Read the per-ability selects and place the chosen set accordingly. The selects hold
-   * *positions* in the chosen set, not raw values, so two abilities cannot claim the same
-   * die by coincidence of equal scores.
+   * A select change moves that ability onto the chosen position, swapping with whoever
+   * held it. Reading every select and rejecting duplicates made rearranging impossible:
+   * a swap necessarily passes through a duplicate.
    */
-  #onAssignChanged() {
-    const picks = [];
-    this.element.querySelectorAll("select.assign-select").forEach((sel) => {
-      picks.push({ ability: sel.dataset.ability, slot: Number(sel.value) });
-    });
-    if (picks.some((p) => !Number.isInteger(p.slot) || p.slot < 0)) return;
-    const used = new Set(picks.map((p) => p.slot));
-    if (used.size !== picks.length) {
-      this.notice = game.i18n.localize("WWN.chargen.error.duplicateSlot");
-      this.render();
-      return;
-    }
-    // picks[i].slot says which set position ability i takes; assign() wants the ability
-    // order that walks the set left to right, which is the inverse permutation.
-    const order = new Array(picks.length);
-    for (const p of picks) order[p.slot] = p.ability;
-    this.#apply(assign(this.chargen, order));
+  #onAssignChanged(ev) {
+    const ability = ev.currentTarget.dataset.ability;
+    const slot = Number(ev.currentTarget.value);
+    this.#apply(placeAt(this.chargen, ability, slot));
   }
 
   #onManualChanged(ev) {

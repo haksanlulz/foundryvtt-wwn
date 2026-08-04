@@ -18,6 +18,7 @@ import {
   recordSets,
   chooseSet,
   assign,
+  placeAt,
   applyFourteenSwap,
   clearSwap,
   setManual,
@@ -347,5 +348,91 @@ describe("step validation", () => {
     assert.equal(res.ok, false);
     assert.equal(res.reason, "WWN.chargen.error.noSet");
     assert.deepEqual(finalScores(res.state), {});
+  });
+});
+
+
+describe("placeAt — rearranging by swap, not by rejection", () => {
+  const set = [15, 14, 13, 12, 10, 8];
+  const fresh = () => must(assign(
+    recordSets(createState({ method: "table" }), [set]), ABILITY_ORDER
+  ));
+
+  it("swaps the two abilities rather than refusing the collision", () => {
+    // str holds slot 0 (15), cha holds slot 5 (8). Put cha on slot 0.
+    const st = must(placeAt(fresh(), "cha", 0));
+    assert.equal(finalScores(st).cha, 15);
+    assert.equal(finalScores(st).str, 8, "displaced ability must take the vacated slot");
+    assert.equal(st.slots.cha, 0);
+    assert.equal(st.slots.str, 5);
+  });
+
+  it("keeps all six values — a swap never loses or duplicates one", () => {
+    const st = must(placeAt(must(placeAt(fresh(), "cha", 0)), "wis", 3));
+    assert.deepEqual(Object.values(finalScores(st)).sort((a, b) => b - a), [...set]);
+    assert.equal(new Set(Object.values(st.slots)).size, 6, "two abilities share a slot");
+  });
+
+  it("is a no-op when the ability already holds that slot", () => {
+    const before = fresh();
+    const after = must(placeAt(before, "str", 0));
+    assert.deepEqual(finalScores(after), finalScores(before));
+  });
+
+  it("refuses under a fixed-order method, and allows it under override", () => {
+    const locked = must(assign(
+      recordSets(createState({ method: "raw-order" }), [set]), ABILITY_ORDER
+    ));
+    const res = placeAt(locked, "cha", 0);
+    assert.equal(res.ok, false);
+    assert.equal(res.reason, "WWN.chargen.error.orderLocked");
+    const open = { ...locked, override: true };
+    assert.ok(placeAt(open, "cha", 0).ok);
+  });
+
+  it("rejects a slot outside the set", () => {
+    assert.equal(placeAt(fresh(), "cha", 6).ok, false);
+    assert.equal(placeAt(fresh(), "cha", -1).ok, false);
+    assert.equal(placeAt(fresh(), "nope", 0).ok, false);
+  });
+
+  it("works before anything has been placed, falling back to roll order", () => {
+    const unplaced = recordSets(createState({ method: "table" }), [set]);
+    const st = must(placeAt({ ...unplaced, chosenSet: 0 }, "cha", 0));
+    assert.equal(finalScores(st).cha, 15);
+  });
+});
+
+describe("RAW is the default method", () => {
+  it("defaults to rolling 3d6 in order, not the house method", () => {
+    assert.equal(createState().method, "raw-order");
+  });
+});
+
+describe("the 14 and rearranging interact", () => {
+  it("rearranging after a 14-swap drops the 14 back to the rolled value", () => {
+    // Documented rather than accidental: the 14 sits on top of an arrangement, so
+    // changing the arrangement rebuilds from the rolled set. The UI shows this by
+    // clearing the active marker and the Undo link.
+    const base = must(assign(
+      recordSets(createState({ method: "table" }), [[15, 14, 13, 12, 10, 8]]), ABILITY_ORDER
+    ));
+    const swapped = must(applyFourteenSwap(base, "cha"));
+    assert.equal(finalScores(swapped).cha, 14);
+    assert.equal(swapped.swapKey, "cha");
+
+    const moved = must(placeAt(swapped, "cha", 0));
+    assert.equal(moved.swapKey, null, "the swap must not survive silently");
+    assert.equal(finalScores(moved).cha, 15, "cha now holds the rolled 15, not the 14");
+    assert.deepEqual(Object.values(finalScores(moved)).sort((a, b) => b - a),
+                     [15, 14, 13, 12, 10, 8]);
+  });
+
+  it("the 14 can simply be re-applied afterwards", () => {
+    const base = must(assign(
+      recordSets(createState({ method: "table" }), [[15, 14, 13, 12, 10, 8]]), ABILITY_ORDER
+    ));
+    const moved = must(placeAt(must(applyFourteenSwap(base, "cha")), "cha", 0));
+    assert.ok(applyFourteenSwap(moved, "cha").ok, "one swap per arrangement, not per life");
   });
 });
