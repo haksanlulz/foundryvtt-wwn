@@ -8,116 +8,122 @@
      one made Save reload the page and save nothing. combat-set-groups.hbs is the
      matching precedent; class-assignment.html carries its own form precisely
      because that app is NOT tag: "form". --}}
-<div class="form-group creator-method">
-    <label>{{localize "WWN.chargen.method.label"}}</label>
-    <div class="form-fields">
-        <select class="method-select" name="method">
-            {{#each methods as |m|}}
-            <option value="{{m.id}}" {{#if m.selected}}selected{{/if}}>{{m.label}}</option>
-            {{/each}}
-        </select>
-    </div>
-</div>
-
-<div class="form-group creator-actions">
-    <button type="button" data-action="rollScores">
-        <i class="fas fa-dice"></i> {{localize "WWN.chargen.roll"}}
-    </button>
-    {{#if isGM}}
-    <button type="button" data-action="toggleOverride" class="{{#if override}}active{{/if}}">
-        <i class="fas fa-{{#if override}}unlock{{else}}lock{{/if}}"></i>
-        {{localize "WWN.chargen.override"}}
-    </button>
-    {{/if}}
-</div>
-
-{{#if notice}}
-<p class="creator-notice notification warning">{{notice}}</p>
-{{/if}}
-
-{{#if override}}
-<p class="creator-notice notification info">{{localize "WWN.chargen.overrideActive"}}</p>
-{{/if}}
-
-{{#if needsPick}}
-<div class="creator-sets">
-    <p class="hint">{{localize "WWN.chargen.pickSet"}}</p>
-    {{#each sets as |s|}}
-    <div class="creator-set {{#if s.chosen}}chosen{{/if}}" data-set-index="{{s.index}}">
-        <span class="values">{{#each s.values}}<b>{{this}}</b>{{/each}}</span>
-        <span class="total">&Sigma;{{s.total}}</span>
-        <button type="button" data-action="chooseSet">{{localize "WWN.chargen.useSet"}}</button>
-    </div>
-    {{/each}}
-</div>
-{{/if}}
-
-<div class="flexrow">
-    <div class="attribute-list">
-        {{#each abilities as |a|}}
-        <div data-ability="{{a.id}}" data-score="{{a.id}}" class="form-group {{#if a.swapped}}swapped{{/if}}">
-            <label>{{a.label}}</label>
-            <div class="form-fields">
-                {{#if ../override}}
-                <input class="manual-score" data-ability="{{a.id}}" type="number"
-                       min="3" max="18" value="{{a.value}}" data-dtype="Number"/>
-                {{else if ../methodDef.freeArrange}}
-                <select class="assign-select" data-ability="{{a.id}}" {{#unless ../hasChosen}}disabled{{/unless}}>
-                    {{#each a.options as |v i|}}
-                    <option value="{{i}}">{{v}}</option>
-                    {{/each}}
-                </select>
-                {{else}}
-                <span class="score-value fixed">{{a.value}}</span>
-                {{/if}}
-
-                {{#if ../canSwap}}
-                {{!-- RAW p.8: after the scores are set, ONE of them may be replaced
-                      with a flat 14. Rendered per row so the target is the row you
-                      click, and marked active on whichever row currently holds it. --}}
-                <a data-action="swapFourteen" role="button"
-                   aria-label="{{localize 'WWN.chargen.swapAria'}}"
-                   title="{{#if a.swapped}}{{localize 'WWN.chargen.swapActive'}}{{else}}{{localize 'WWN.chargen.swapHint'}}{{/if}}"
-                   class="swap-14 {{#if a.swapped}}active{{/if}}">14</a>
-                {{/if}}
-            </div>
+{{!-- Single root, and NOT a <form>: ApplicationV2 requires each part to render
+     exactly one element, and this app already renders its root as the form
+     (tag: "form"). Deleting the old nested <form> without putting a wrapper back
+     left six roots and the dialog refused to render at all. --}}
+<div class="wwn-creator-body">
+    <div class="form-group creator-method">
+        <label>{{localize "WWN.chargen.method.label"}}</label>
+        <div class="form-fields">
+            <select class="method-select" name="method">
+                {{#each methods as |m|}}
+                <option value="{{m.id}}" {{#if m.selected}}selected{{/if}}>{{m.label}}</option>
+                {{/each}}
+            </select>
         </div>
-        {{/each}}
-        {{#if swapKey}}
-        <a data-action="clearSwap" class="clear-swap" role="button">
-          <i class="fas fa-rotate-left"></i> {{localize "WWN.chargen.clearSwap"}}
-        </a>
+    </div>
+
+    <div class="form-group creator-actions">
+        <button type="button" data-action="rollScores">
+            <i class="fas fa-dice"></i> {{localize "WWN.chargen.roll"}}
+        </button>
+        {{#if isGM}}
+        <button type="button" data-action="toggleOverride" class="{{#if override}}active{{/if}}">
+            <i class="fas fa-{{#if override}}unlock{{else}}lock{{/if}}"></i>
+            {{localize "WWN.chargen.override"}}
+        </button>
         {{/if}}
     </div>
 
-    <div class="roll-stats">
-        <div class="form-group">
-            <label>Sum</label>
-            <div class="form-fields"><span class="sum">{{stats.sum}}</span></div>
+    {{#if notice}}
+    <p class="creator-notice notification warning">{{notice}}</p>
+    {{/if}}
+
+    {{#if override}}
+    <p class="creator-notice notification info">{{localize "WWN.chargen.overrideActive"}}</p>
+    {{/if}}
+
+    {{#if needsPick}}
+    <div class="creator-sets">
+        <p class="hint">{{localize "WWN.chargen.pickSet"}}</p>
+        {{#each sets as |s|}}
+        <div class="creator-set {{#if s.chosen}}chosen{{/if}}" data-set-index="{{s.index}}">
+            <span class="values">{{#each s.values}}<b>{{this}}</b>{{/each}}</span>
+            <span class="total">&Sigma;{{s.total}}</span>
+            <button type="button" data-action="chooseSet">{{localize "WWN.chargen.useSet"}}</button>
         </div>
-        <div class="form-group">
-            <label>Avg</label>
-            <div class="form-fields"><span class="avg">{{stats.avg}}</span></div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    <div class="flexrow">
+        <div class="attribute-list">
+            {{#each abilities as |a|}}
+            <div data-ability="{{a.id}}" data-score="{{a.id}}" class="form-group {{#if a.swapped}}swapped{{/if}}">
+                <label>{{a.label}}</label>
+                <div class="form-fields">
+                    {{#if ../override}}
+                    <input class="manual-score" data-ability="{{a.id}}" type="number"
+                           min="3" max="18" value="{{a.value}}" data-dtype="Number"/>
+                    {{else if ../methodDef.freeArrange}}
+                    <select class="assign-select" data-ability="{{a.id}}" {{#unless ../hasChosen}}disabled{{/unless}}>
+                        {{#each a.options as |v i|}}
+                        <option value="{{i}}">{{v}}</option>
+                        {{/each}}
+                    </select>
+                    {{else}}
+                    <span class="score-value fixed">{{a.value}}</span>
+                    {{/if}}
+
+                    {{#if ../canSwap}}
+                    {{!-- RAW p.8: after the scores are set, ONE of them may be replaced
+                          with a flat 14. Rendered per row so the target is the row you
+                          click, and marked active on whichever row currently holds it. --}}
+                    <a data-action="swapFourteen" role="button"
+                       aria-label="{{localize 'WWN.chargen.swapAria'}}"
+                       title="{{#if a.swapped}}{{localize 'WWN.chargen.swapActive'}}{{else}}{{localize 'WWN.chargen.swapHint'}}{{/if}}"
+                       class="swap-14 {{#if a.swapped}}active{{/if}}">14</a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+            {{#if swapKey}}
+            <a data-action="clearSwap" class="clear-swap" role="button">
+              <i class="fas fa-rotate-left"></i> {{localize "WWN.chargen.clearSwap"}}
+            </a>
+            {{/if}}
         </div>
-        <div class="form-group">
-            <label>&sigma;</label>
-            <div class="form-fields"><span class="std">{{stats.std}}</span></div>
-        </div>
-        <hr>
-        <div class="form-group">
-            <label>Silver&nbsp;</label>
-            <div class="form-fields">
-                <a data-action="rollSilver"><i class="fas fa-dice"></i></a>
+
+        <div class="roll-stats">
+            <div class="form-group">
+                <label>Sum</label>
+                <div class="form-fields"><span class="sum">{{stats.sum}}</span></div>
+            </div>
+            <div class="form-group">
+                <label>Avg</label>
+                <div class="form-fields"><span class="avg">{{stats.avg}}</span></div>
+            </div>
+            <div class="form-group">
+                <label>&sigma;</label>
+                <div class="form-fields"><span class="std">{{stats.std}}</span></div>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label>Silver&nbsp;</label>
+                <div class="form-fields">
+                    <a data-action="rollSilver"><i class="fas fa-dice"></i></a>
+                </div>
+            </div>
+            <div class="form-group">
+                <input name="silver" class="silver-value" type="number" value="{{silver}}" disabled/>
             </div>
         </div>
-        <div class="form-group">
-            <input name="silver" class="silver-value" type="number" value="{{silver}}" disabled/>
-        </div>
     </div>
-</div>
 
-<footer class="sheet-footer">
-  <button type="submit" {{#unless complete}}disabled{{/unless}}>
-    <i class="fas fa-save"></i>{{localize "Save Changes"}}
-  </button>
-</footer>
+    <footer class="sheet-footer">
+      <button type="submit" {{#unless complete}}disabled{{/unless}}>
+        <i class="fas fa-save"></i>{{localize "Save Changes"}}
+      </button>
+    </footer>
+</div>

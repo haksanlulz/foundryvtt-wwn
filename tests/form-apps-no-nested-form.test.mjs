@@ -61,6 +61,39 @@ const KNOWN_LATENT = new Set([
   "templates/apps/party-select.html",
 ]);
 
+const VOID_TAGS = new Set([
+  "area", "base", "br", "col", "embed", "hr", "img", "input",
+  "link", "meta", "param", "source", "track", "wbr",
+]);
+
+/**
+ * How many elements does this template render at the top level?
+ *
+ * ApplicationV2 requires exactly one per part — "Template part must render a single HTML
+ * element" — and a template that violates it does not degrade, the whole application
+ * refuses to render. Handlebars blocks are treated as transparent, which is the common
+ * case and the one worth catching.
+ */
+function rootCount(html) {
+  const body = html.replace(/\{\{![\s\S]*?\}\}/g, "");
+  let depth = 0;
+  let roots = 0;
+  for (const m of body.matchAll(/<(\/?)([a-zA-Z][\w-]*)([^>]*)>/g)) {
+    const [, closing, tag, attrs] = m;
+    const name = tag.toLowerCase();
+    if (VOID_TAGS.has(name) || attrs.trimEnd().endsWith("/")) {
+      if (depth === 0) roots += 1;
+      continue;
+    }
+    if (closing) depth = Math.max(0, depth - 1);
+    else {
+      if (depth === 0) roots += 1;
+      depth += 1;
+    }
+  }
+  return roots;
+}
+
 describe("apps with tag: \"form\" must not nest a <form> in their template", () => {
   const entries = formAppTemplates();
 
@@ -82,6 +115,20 @@ describe("apps with tag: \"form\" must not nest a <form> in their template", () 
         `${rel} gained a submit button, so this is LIVE now, not latent — fix it`);
     }
   });
+
+  // Not scoped to form-apps: EVERY ApplicationV2 part must render a single root, and
+  // this repo has now shipped two template-structure bugs in a row that only ever
+  // surfaced as a runtime failure on a live server.
+  for (const { app, template } of entries) {
+    it(`${template} renders exactly one root element`, () => {
+      const full = path.join(ROOT, template);
+      if (!fs.existsSync(full)) return;
+      const n = rootCount(fs.readFileSync(full, "utf8"));
+      assert.equal(n, 1,
+        `${template} renders ${n} top-level elements; ApplicationV2 (${app}) requires 1. `
+        + 'The application will refuse to render: "Template part must render a single HTML element."');
+    });
+  }
 
   for (const { app, template } of entries) {
     it(`${template} (used by ${app})`, { skip: KNOWN_LATENT.has(template) && "known-latent, see KNOWN_LATENT" }, () => {
