@@ -187,20 +187,19 @@ describe("A7 — RAW roll-in-order locks the order unless the GM is Clement", ()
     });
   });
 
-  it("refuses re-ordering by default", () => {
+  it("PERMITS re-ordering — operator ruling 2026-08-10 retired the lock", () => {
+    // Rolling in order is what you get by leaving the values alone. Enforcing it added a
+    // restriction and bought nothing, and it took the Clement-GM setting with it.
     const st = recordSets(createState({ method: "raw-order" }), [[9, 12, 15, 6, 18, 3]]);
-    const res = assign(st, ["cha", "wis", "int", "con", "dex", "str"]);
-    assert.equal(res.ok, false);
-    assert.equal(res.reason, "WWN.chargen.error.orderLocked");
+    assert.ok(assign(st, ["cha", "wis", "int", "con", "dex", "str"]).ok);
+    assert.equal(effectiveMethod("raw-order").freeArrange, true);
   });
 
-  it("permits re-ordering once the Clement-GM option is on", () => {
-    const st = recordSets(
-      createState({ method: "raw-order", clementGm: true }), [[9, 12, 15, 6, 18, 3]]
-    );
-    assert.ok(assign(st, ["cha", "wis", "int", "con", "dex", "str"]).ok);
-    assert.equal(effectiveMethod("raw-order", { clementGm: true }).freeArrange, true);
-    assert.equal(effectiveMethod("raw-order").freeArrange, false);
+  it("still lands in roll order when nothing is rearranged", () => {
+    const st = recordSets(createState({ method: "raw-order" }), [[9, 12, 15, 6, 18, 3]]);
+    assert.deepEqual(finalScores(st), {
+      str: 9, dex: 12, con: 15, int: 6, wis: 18, cha: 3,
+    });
   });
 });
 
@@ -265,11 +264,9 @@ describe("A10 — changing method resets rather than carries", () => {
     assert.equal(switched.swapKey, null);
   });
 
-  it("keeps the GM options across the switch", () => {
-    const st = createState({ method: "table", clementGm: true, override: true });
-    const switched = setMethod(st, "raw-order");
-    assert.equal(switched.clementGm, true);
-    assert.equal(switched.override, true);
+  it("keeps the GM override across the switch", () => {
+    const st = createState({ method: "table", override: true });
+    assert.equal(setMethod(st, "raw-order").override, true);
   });
 });
 
@@ -328,12 +325,19 @@ describe("slot tracking — which set position each ability took", () => {
     assert.equal(finalScores(st).str, finalScores(st).dex, "the two 12s are the ambiguous case");
   });
 
-  it("is cleared when the method changes or new sets arrive", () => {
+  it("is cleared by a method change, and re-seeded by a fresh single set", () => {
     const st = must(assign(
       recordSets(createState({ method: "table" }), [[15, 14, 13, 12, 10, 8]]), ABILITY_ORDER
     ));
-    assert.deepEqual(setMethod(st, "raw-array").slots, {});
-    assert.deepEqual(recordSets(st, [[9, 9, 9, 9, 9, 9]]).slots, {});
+    assert.deepEqual(setMethod(st, "raw-array").slots, {}, "a method change drops everything");
+    // One set is auto-placed, so slots come back seeded in roll order against the NEW values.
+    const rerolled = recordSets(st, [[9, 8, 7, 6, 5, 4]]);
+    assert.deepEqual(rerolled.slots, { str: 0, dex: 1, con: 2, int: 3, wis: 4, cha: 5 });
+    assert.deepEqual(Object.values(finalScores(rerolled)), [9, 8, 7, 6, 5, 4]);
+  });
+
+  it("stays empty while several sets are still on the table", () => {
+    assert.deepEqual(tableState().slots, {}, "nothing is placed until a set is chosen");
   });
 });
 
@@ -379,15 +383,11 @@ describe("placeAt — rearranging by swap, not by rejection", () => {
     assert.deepEqual(finalScores(after), finalScores(before));
   });
 
-  it("refuses under a fixed-order method, and allows it under override", () => {
-    const locked = must(assign(
-      recordSets(createState({ method: "raw-order" }), [set]), ABILITY_ORDER
-    ));
-    const res = placeAt(locked, "cha", 0);
-    assert.equal(res.ok, false);
-    assert.equal(res.reason, "WWN.chargen.error.orderLocked");
-    const open = { ...locked, override: true };
-    assert.ok(placeAt(open, "cha", 0).ok);
+  it("works under every method now that no method locks the order", () => {
+    for (const method of ["raw-order", "raw-array", "table"]) {
+      const st = recordSets(createState({ method }), [set]);
+      assert.ok(placeAt(st, "cha", 0).ok, `${method} refused a rearrange`);
+    }
   });
 
   it("rejects a slot outside the set", () => {
@@ -434,5 +434,31 @@ describe("the 14 and rearranging interact", () => {
     ));
     const moved = must(placeAt(must(applyFourteenSwap(base, "cha")), "cha", 0));
     assert.ok(applyFourteenSwap(moved, "cha").ok, "one swap per arrangement, not per life");
+  });
+});
+
+
+describe("single-set methods place their values immediately", () => {
+  // The bug: recordSets recorded the roll but never placed it. Multi-set methods get
+  // placed by chooseSet via the "Use this set" button, which a single-set method never
+  // renders — so nothing called assign(), the dice went to chat, and the dialog showed
+  // six zeroes with no control capable of fixing them.
+  it("3d6 in order arrives on the sheet, not as zeroes", () => {
+    const rolls = [[3, 3, 3], [4, 4, 4], [5, 5, 5], [2, 2, 2], [6, 6, 6], [1, 1, 1]];
+    const st = recordSets(createState({ method: "raw-order" }), buildSets("raw-order", rolls));
+    assert.deepEqual(finalScores(st), { str: 9, dex: 12, con: 15, int: 6, wis: 18, cha: 3 });
+    assert.ok(validate(st).ok, "the step should be complete straight off the roll");
+  });
+
+  it("the standard array arrives placed too", () => {
+    const st = recordSets(createState({ method: "raw-array" }), buildSets("raw-array"));
+    assert.deepEqual(Object.values(finalScores(st)), [...STANDARD_ARRAY]);
+    assert.ok(validate(st).ok);
+  });
+
+  it("but a multi-set method still waits for the player to choose", () => {
+    const st = tableState();
+    assert.equal(st.chosenSet, null);
+    assert.deepEqual(finalScores(st), {}, "picking a set is the player's call, not automatic");
   });
 });

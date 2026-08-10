@@ -42,7 +42,10 @@ export const METHODS = {
     formula: "3d6",
     pool: 3,
     keep: 3,
-    freeArrange: false, // unless the Clement-GM option is on, see effectiveMethod()
+    // Operator ruling 2026-08-10: nothing forces the order. The book's roll-in-order is
+    // what you get if you leave the values alone, so locking them added a restriction and
+    // bought nothing. This retired the Clement-GM setting with it.
+    freeArrange: true,
     fourteenSwap: true,
   },
   "raw-array": {
@@ -70,15 +73,13 @@ export const METHODS = {
 export const DEFAULT_METHOD = "raw-order";
 
 /**
- * Resolve a method's rules against the GM options in play.
+ * Resolve a method's rules.
  * @param {string} methodId
- * @param {{clementGm?: boolean}} [opts]  p.8 "Clement GMs" may let rolled scores be arranged
  * @returns {MethodDef}
  */
-export function effectiveMethod(methodId, { clementGm = false } = {}) {
+export function effectiveMethod(methodId) {
   const base = METHODS[methodId];
   if (!base) throw new Error(`unknown attribute method: ${methodId}`);
-  if (methodId === "raw-order" && clementGm) return { ...base, freeArrange: true };
   return { ...base };
 }
 
@@ -118,10 +119,9 @@ export function buildSets(methodId, rolls = []) {
 }
 
 /** Fresh step state. */
-export function createState({ method = DEFAULT_METHOD, clementGm = false, override = false } = {}) {
+export function createState({ method = DEFAULT_METHOD, override = false } = {}) {
   return {
     method,
-    clementGm,
     override,
     sets: [],
     chosenSet: null,
@@ -150,7 +150,7 @@ export function setMethod(state, methodId) {
 
 /** Record freshly generated sets, clearing any prior choice. */
 export function recordSets(state, sets) {
-  return {
+  const next = {
     ...state,
     sets,
     chosenSet: sets.length === 1 ? 0 : null,
@@ -158,6 +158,13 @@ export function recordSets(state, sets) {
     slots: {},
     swapKey: null,
   };
+  // Place them immediately when there is only one set to have. Multi-set methods get
+  // placed by chooseSet, but a single-set method never renders a "Use this set" button,
+  // so nothing else would ever call assign(): the dice rolled, the chat card posted, and
+  // the dialog showed six zeroes with no way to fix them short of GM override.
+  if (next.chosenSet === null) return next;
+  const placed = assign(next, ABILITY_ORDER);
+  return placed.ok ? placed.state : next;
 }
 
 /** Pick exactly one whole set. The others are discarded, never merged (probe A2). */
@@ -178,7 +185,7 @@ export function chooseSet(state, index) {
 export function assign(state, order) {
   if (state.chosenSet === null) return { ok: false, reason: "WWN.chargen.error.noSet", state };
   const values = state.sets[state.chosenSet];
-  const m = effectiveMethod(state.method, { clementGm: state.clementGm });
+  const m = effectiveMethod(state.method);
   const wanted = order ?? ABILITY_ORDER;
 
   const reordered = wanted.join(",") !== ABILITY_ORDER.join(",");
@@ -209,7 +216,7 @@ export function assign(state, order) {
  */
 export function placeAt(state, ability, slot) {
   if (state.chosenSet === null) return { ok: false, reason: "WWN.chargen.error.noSet", state };
-  const m = effectiveMethod(state.method, { clementGm: state.clementGm });
+  const m = effectiveMethod(state.method);
   if (!m.freeArrange && !state.override) {
     return { ok: false, reason: "WWN.chargen.error.orderLocked", state };
   }
@@ -242,7 +249,7 @@ export function placeAt(state, ability, slot) {
  * Refused under the standard array (p.8) and refused a second time (probe A4/A6).
  */
 export function applyFourteenSwap(state, key) {
-  const m = effectiveMethod(state.method, { clementGm: state.clementGm });
+  const m = effectiveMethod(state.method);
   if (!m.fourteenSwap && !state.override) {
     return { ok: false, reason: "WWN.chargen.error.swapArray", state };
   }

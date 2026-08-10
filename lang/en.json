@@ -1579,8 +1579,6 @@
   "WWN.Setting.ReplaceStrainWithWoundsHint": "Replace System Strain with Injuries/Wounds tracking.",
   "WWN.Setting.AttributeMethod": "Attribute Generation Method",
   "WWN.Setting.AttributeMethodHint": "Default method offered in the character generator. Players may pick another; a GM can override any restriction from inside the dialog.",
-  "WWN.Setting.ClementGm": "Clement GM: arrange rolled scores",
-  "WWN.Setting.ClementGmHint": "WWN Deluxe p.8 option. Lets rolled-in-order scores be rearranged freely.",
   "WWN.chargen.method.label": "Method",
   "WWN.chargen.method.rawOrder": "Roll 3d6 in order (RAW)",
   "WWN.chargen.method.rawArray": "Standard array 14/12/11/10/9/7 (RAW)",
@@ -1596,7 +1594,7 @@
   "WWN.chargen.error.noSuchSet": "That set does not exist.",
   "WWN.chargen.error.badOrder": "Each attribute needs exactly one score.",
   "WWN.chargen.error.duplicateSlot": "Two attributes are claiming the same rolled score.",
-  "WWN.chargen.error.orderLocked": "This method assigns scores in order. Enable the Clement GM option to rearrange.",
+  "WWN.chargen.error.orderLocked": "This method assigns scores in order.",
   "WWN.chargen.error.swapArray": "The standard array is offered instead of the 14 swap, not alongside it.",
   "WWN.chargen.error.swapOnce": "Only one score may be replaced with 14.",
   "WWN.chargen.error.badAbility": "Unknown attribute.",
@@ -1618,5 +1616,6 @@
   "WWN.Profile.Chargen": "Character Creation",
   "WWN.Profile.ChargenHint": "While checked, the attribute generator is offered on the Main tab. Untick when the character is finished.",
   "WWN.chargen.swapActive": "This score is the 14. Click Undo below to put the original back.",
-  "WWN.chargen.swapAria": "Replace this attribute's score with 14"
+  "WWN.chargen.swapAria": "Replace this attribute's score with 14",
+  "WWN.Profile.BackgroundItem": "Background (item)"
 }

@@ -71,7 +71,6 @@ export class WwnCharacterCreator extends HandlebarsApplicationMixin(ApplicationV
     this.preSwap = {};
     this.chargen = createState({
       method: game.settings.get("wwn", "attributeMethod") ?? DEFAULT_METHOD,
-      clementGm: game.settings.get("wwn", "clementGm") ?? false,
       override: false,
     });
     this.#postedSummary = false;
@@ -87,13 +86,14 @@ export class WwnCharacterCreator extends HandlebarsApplicationMixin(ApplicationV
   /** @override */
   async _prepareContext(_options) {
     const st = this.chargen;
-    const m = effectiveMethod(st.method, { clementGm: st.clementGm });
+    const m = effectiveMethod(st.method);
     const scores = finalScores(st);
     const chosen = st.chosenSet === null ? null : st.sets[st.chosenSet];
 
+    // No actor clone here. This template reads none of its fields, and deep-cloning the
+    // whole actor on every render made rearranging scores visibly laggy — one clone per
+    // dropdown change.
     return {
-      ...foundry.utils.deepClone(this.actor),
-      user: game.user,
       config: CONFIG.WWN,
       isGM: game.user.isGM,
       method: st.method,
@@ -199,7 +199,7 @@ export class WwnCharacterCreator extends HandlebarsApplicationMixin(ApplicationV
   /** Roll every score this method needs, in one action, and post one chat card. */
   static async #onRollScores() {
     const st = this.chargen;
-    const m = effectiveMethod(st.method, { clementGm: st.clementGm });
+    const m = effectiveMethod(st.method);
     if (!m.formula) {
       this.#apply({ ok: true, state: recordSets(st, buildSets(st.method)) });
       return;

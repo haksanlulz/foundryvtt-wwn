@@ -127,14 +127,6 @@ export function registerSettings() {
     },
   });
 
-  registerWwnSetting("clementGm", {
-    name: "WWN.Setting.ClementGm",
-    hint: "WWN.Setting.ClementGmHint",
-    scope: "world",
-    type: Boolean,
-    default: false,
-  });
-
   registerWwnSetting("saveSet", {
     name: "WWN.Setting.SaveSet",
     hint: "WWN.Setting.SaveSetHint",
