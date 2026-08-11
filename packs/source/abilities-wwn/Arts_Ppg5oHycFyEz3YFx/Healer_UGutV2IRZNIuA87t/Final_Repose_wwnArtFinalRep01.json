@@ -1,0 +1,50 @@
+{
+  "_id": "wwnArtFinalRep01",
+  "name": "Final Repose",
+  "type": "power",
+  "img": "systems/wwn/assets/icons/powers/healer-art.png",
+  "effects": [],
+  "folder": "UGutV2IRZNIuA87t",
+  "sort": 0,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnArtFinalRep01"
+    }
+  },
+  "_key": "!items!wwnArtFinalRep01",
+  "system": {
+    "subType": "art",
+    "description": "<p>Target a visible living creature and Commit Effort for the day as an Instant action. For the rest of the scene, they take a Physical saving throw penalty equal to your Heal skill. If they are reduced to zero hit points before the end of the scene, they die with no chance for stabilization or revival.</p>",
+    "source": "Healer",
+    "resourceName": "Effort",
+    "commitmentOptions": [
+      {
+        "cost": 1,
+        "length": "day",
+        "note": ""
+      }
+    ],
+    "poolCommitted": {
+      "none": 0,
+      "active": 0,
+      "scene": 0,
+      "day": 0
+    },
+    "internalResource": {
+      "value": 0,
+      "max": 0
+    },
+    "internalResourceLength": "scene",
+    "activation": {
+      "roll": "",
+      "rollType": "result",
+      "rollTarget": 0,
+      "save": "Physical",
+      "range": "",
+      "duration": "scene"
+    }
+  },
+  "ownership": {
+    "default": 0
+  }
+}

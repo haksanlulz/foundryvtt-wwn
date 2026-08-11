@@ -25,76 +25,125 @@
   "documentTypes": {
     "Actor": {
       "character": {
-        "htmlFields": ["biography", "details.notes"]
+        "htmlFields": [
+          "biography",
+          "details.notes"
+        ]
       },
       "monster": {
-        "htmlFields": ["biography"]
+        "htmlFields": [
+          "biography"
+        ]
       },
       "faction": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "starship": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "powerArmor": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "pc": {
-        "htmlFields": ["biography", "details.notes"]
+        "htmlFields": [
+          "biography",
+          "details.notes"
+        ]
       },
       "npc": {
-        "htmlFields": ["biography"]
+        "htmlFields": [
+          "biography"
+        ]
       }
     },
     "Item": {
       "item": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "weapon": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "armor": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "skill": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "power": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "classEdge": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "focus": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "currency": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "asset": {
-        "htmlFields": ["desc"]
+        "htmlFields": [
+          "desc"
+        ]
       },
       "shipFitting": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "shipWeapon": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "shipDefense": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "armorFitting": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "art": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "spell": {
-        "htmlFields": ["description"]
+        "htmlFields": [
+          "description"
+        ]
       },
       "ability": {
-        "htmlFields": ["description"]
-      }
+        "htmlFields": [
+          "description"
+        ]
+      },
+      "background": {}
     }
   },
   "primaryTokenAttribute": "hp",

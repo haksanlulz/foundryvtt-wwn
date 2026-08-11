@@ -103,6 +103,7 @@ export class WwnItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       shipWeapon: "ship-weapon",
       shipDefense: "ship-defense",
       armorFitting: "armor-fitting",
+      background: "background",
     };
     parts.info.template = `${TPL}/attributes/${byType[type] ?? "item"}.hbs`;
     return parts;
@@ -315,6 +316,18 @@ export class WwnItemSheet extends HandlebarsApplicationMixin(ItemSheetV2) {
       }
       if (submitData.system.bonusDice === "" || submitData.system.bonusDice === undefined) {
         submitData.system.bonusDice = null;
+      }
+    }
+
+    if (this.item.type === "background" && submitData.system) {
+      for (const key of ["quickSkills", "growth", "learning"]) {
+        const raw = submitData.system[key];
+        if (typeof raw === "string") {
+          submitData.system[key] = raw.split(",").map((s) => s.trim()).filter(Boolean);
+        }
+      }
+      if (submitData.system.tableRoll === "" || submitData.system.tableRoll === undefined) {
+        submitData.system.tableRoll = null;
       }
     }
 

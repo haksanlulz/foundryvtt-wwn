@@ -1,5 +1,17 @@
 export const registerHelpers = async function () {
   // Handlebars template helpers
+  // `join` is used by the focus, class-edge and background sheets. It appears to be a
+  // Foundry built-in, but nothing in this system registers it, and if that ever stops
+  // being true the affected inputs render EMPTY and then overwrite the real array with
+  // nothing on the next save. Register a fallback only when it is genuinely absent, so
+  // core keeps precedence wherever it does provide one.
+  if (!Handlebars.helpers.join) {
+    Handlebars.registerHelper("join", function (arr, sep) {
+      if (!Array.isArray(arr)) return "";
+      return arr.join(typeof sep === "string" ? sep : ", ");
+    });
+  }
+
   Handlebars.registerHelper("eq", function (a, b) {
     return a == b;
   });

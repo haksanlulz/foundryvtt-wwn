@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg17Slave____",
+  "name": "Slave",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1700,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg17Slave____"
+    }
+  },
+  "_key": "!items!wwnBg17Slave____",
+  "system": {
+    "description": "",
+    "freeSkill": "Sneak-0",
+    "quickSkills": [
+      "Survive-0",
+      "Exert-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Any Combat",
+      "Any Skill",
+      "Convince",
+      "Exert",
+      "Sneak",
+      "Survive",
+      "Work"
+    ],
+    "tableRoll": 17
+  },
+  "ownership": {
+    "default": 0
+  }
+}

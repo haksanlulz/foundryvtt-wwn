@@ -118,6 +118,7 @@ Hooks.once("init", async function () {
     shipWeapon: models.WwnShipWeapon,
     shipDefense: models.WwnShipDefense,
     armorFitting: models.WwnArmorFitting,
+    background: models.WwnBackground,
     // Legacy item types — load aliases during migration.
     art: models.WwnPower,
     spell: models.WwnPower,
@@ -128,6 +129,7 @@ Hooks.once("init", async function () {
     shipWeapon: "TYPES.Item.shipWeapon",
     shipDefense: "TYPES.Item.shipDefense",
     armorFitting: "TYPES.Item.armorFitting",
+    background: "TYPES.Item.background",
   });
 
   CONFIG.Dice.rolls.unshift(WwnDamageRoll, WwnSkillRoll, WwnAttackRoll, WwnRoll);

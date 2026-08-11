@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg05Criminal_",
+  "name": "Criminal",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 500,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg05Criminal_"
+    }
+  },
+  "_key": "!items!wwnBg05Criminal_",
+  "system": {
+    "description": "",
+    "freeSkill": "Sneak-0",
+    "quickSkills": [
+      "Connect-0",
+      "Convince-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Physical",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Any Combat",
+      "Connect",
+      "Convince",
+      "Exert",
+      "Notice",
+      "Sneak",
+      "Trade"
+    ],
+    "tableRoll": 5
+  },
+  "ownership": {
+    "default": 0
+  }
+}

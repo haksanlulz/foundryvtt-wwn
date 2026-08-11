@@ -4,6 +4,8 @@
 
     {{!-- Abilities --}}
     <div class="wwn-panel wwn-main-abilities">
+      {{!-- Shown while the Details tab's "Character Creation" box is ticked. That box IS
+            isNew — previously isNew was undefined, so this button never rendered at all. --}}
       {{#if isNew}}
       <div class="wwn-main-abilities-actions">
         <a class="wwn-rollable" data-action="generateScores" title="{{localize 'WWN.dialog.generateScores'}}">

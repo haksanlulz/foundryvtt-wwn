@@ -17,6 +17,21 @@
               <input type="text" name="system.details.background" value="{{system.details.background}}" />
             </div>
           </div>
+          {{#if backgrounds.length}}
+          {{!-- Dropped background items. Without this they were created on the actor and
+                rendered nowhere, so dragging one looked like nothing happened. --}}
+          <div class="form-group wwn-form-span">
+            <label>{{localize "WWN.Profile.BackgroundItem"}}</label>
+            <div class="form-fields owned-class-edges">
+              {{#each backgrounds as |bg|}}
+              <span class="item" data-item-id="{{bg.id}}">
+                <a data-action="editItem" title="{{localize 'WWN.Edit'}}">{{bg.name}}</a>
+                <a data-action="deleteItem" title="{{localize 'WWN.Delete'}}"><i class="fas fa-trash"></i></a>
+              </span>
+              {{/each}}
+            </div>
+          </div>
+          {{/if}}
           <div class="form-group wwn-form-span">
             <label>{{localize "WWN.details.class"}}</label>
             <div class="form-fields owned-class-edges">
@@ -65,6 +80,13 @@
       <div class="wwn-form-panel">
         <div class="wwn-section-header">{{localize "WWN.category.config"}}</div>
         <div class="wwn-form-panel-fields">
+          <div class="form-group">
+            <label title="{{localize 'WWN.Profile.ChargenHint'}}">{{localize "WWN.Profile.Chargen"}}</label>
+            <div class="form-fields">
+              <input type="checkbox" name="system.details.chargen" {{checked system.details.chargen}}
+                data-dtype="Boolean" />
+            </div>
+          </div>
           <div class="form-group">
             <label title="{{localize 'WWN.AB'}}">{{localize "WWN.ABShort"}}</label>
             <div class="form-fields">

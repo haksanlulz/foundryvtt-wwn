@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg14Priest___",
+  "name": "Priest",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1400,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg14Priest___"
+    }
+  },
+  "_key": "!items!wwnBg14Priest___",
+  "system": {
+    "description": "",
+    "freeSkill": "Pray-0",
+    "quickSkills": [
+      "Convince-0",
+      "Know-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Physical",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Connect",
+      "Know",
+      "Lead",
+      "Heal",
+      "Convince",
+      "Pray",
+      "Pray"
+    ],
+    "tableRoll": 14
+  },
+  "ownership": {
+    "default": 0
+  }
+}

@@ -130,6 +130,7 @@ export class WwnBaseActorSheet extends composeMixins(ActorItemActionsMixin)(
     context.gear = items.filter((i) => i.type === "item");
     context.currencies = items.filter((i) => i.type === "currency");
     context.skills = items.filter((i) => i.type === "skill").sort((a, b) => a.name.localeCompare(b.name));
+    context.backgrounds = items.filter((i) => i.type === "background");
 
     // Powers / ClassEdges / Foci / resource pools
     preparePowersTabContext(context, actor, {

@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg10Nomad____",
+  "name": "Nomad",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1000,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg10Nomad____"
+    }
+  },
+  "_key": "!items!wwnBg10Nomad____",
+  "system": {
+    "description": "",
+    "freeSkill": "Ride-0",
+    "quickSkills": [
+      "Survive-0",
+      "Any Combat-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Exert",
+      "Lead",
+      "Notice",
+      "Ride",
+      "Survive",
+      "Trade"
+    ],
+    "tableRoll": 10
+  },
+  "ownership": {
+    "default": 0
+  }
+}

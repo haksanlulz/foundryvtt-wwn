@@ -17,3 +17,4 @@ export { default as WwnShipFitting } from "./item/ship-fitting.mjs";
 export { default as WwnShipWeapon } from "./item/ship-weapon.mjs";
 export { default as WwnShipDefense } from "./item/ship-defense.mjs";
 export { default as WwnArmorFitting } from "./item/armor-fitting.mjs";
+export { default as WwnBackground } from "./item/background.mjs";

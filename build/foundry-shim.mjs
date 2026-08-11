@@ -64,6 +64,12 @@ if (!Array.prototype.filterJoin) {
   };
 }
 
+// Document base classes. Foundry supplies these globally at runtime; tests that import
+// module/documents/*.mjs need something for `extends` to resolve against.
+globalThis.Actor ??= class Actor {};
+globalThis.Item ??= class Item {};
+globalThis.ActiveEffect ??= class ActiveEffect {};
+
 globalThis.CONFIG ??= {};
 globalThis.CONFIG.WWN ??= {
   defaultIcons: { currency: "icons/svg/coins.svg" },

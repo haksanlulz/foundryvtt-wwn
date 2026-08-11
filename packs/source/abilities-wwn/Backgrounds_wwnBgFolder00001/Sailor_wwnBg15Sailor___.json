@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg15Sailor___",
+  "name": "Sailor",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1500,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg15Sailor___"
+    }
+  },
+  "_key": "!items!wwnBg15Sailor___",
+  "system": {
+    "description": "",
+    "freeSkill": "Sail-0",
+    "quickSkills": [
+      "Exert-0",
+      "Notice-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Craft",
+      "Exert",
+      "Heal",
+      "Notice",
+      "Perform",
+      "Sail"
+    ],
+    "tableRoll": 15
+  },
+  "ownership": {
+    "default": 0
+  }
+}

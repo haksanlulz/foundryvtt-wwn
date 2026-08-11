@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg03Carter___",
+  "name": "Carter",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 300,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg03Carter___"
+    }
+  },
+  "_key": "!items!wwnBg03Carter___",
+  "system": {
+    "description": "",
+    "freeSkill": "Ride-0",
+    "quickSkills": [
+      "Connect-0",
+      "Any Combat-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Craft",
+      "Exert",
+      "Notice",
+      "Ride",
+      "Survive",
+      "Trade"
+    ],
+    "tableRoll": 3
+  },
+  "ownership": {
+    "default": 0
+  }
+}

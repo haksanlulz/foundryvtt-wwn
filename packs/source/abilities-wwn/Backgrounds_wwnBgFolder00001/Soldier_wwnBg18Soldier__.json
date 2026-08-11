@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg18Soldier__",
+  "name": "Soldier",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1800,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg18Soldier__"
+    }
+  },
+  "_key": "!items!wwnBg18Soldier__",
+  "system": {
+    "description": "",
+    "freeSkill": "Any Combat-0",
+    "quickSkills": [
+      "Exert-0",
+      "Survive-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Physical",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Any Combat",
+      "Exert",
+      "Lead",
+      "Notice",
+      "Ride",
+      "Sneak",
+      "Survive"
+    ],
+    "tableRoll": 18
+  },
+  "ownership": {
+    "default": 0
+  }
+}

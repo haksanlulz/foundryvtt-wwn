@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg07Laborer__",
+  "name": "Laborer",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 700,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg07Laborer__"
+    }
+  },
+  "_key": "!items!wwnBg07Laborer__",
+  "system": {
+    "description": "",
+    "freeSkill": "Work-0",
+    "quickSkills": [
+      "Connect-0",
+      "Exert-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+1 Any Stat",
+      "+1 Any Stat",
+      "+1 Any Stat",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Any Skill",
+      "Connect",
+      "Convince",
+      "Craft",
+      "Exert",
+      "Ride",
+      "Work"
+    ],
+    "tableRoll": 7
+  },
+  "ownership": {
+    "default": 0
+  }
+}

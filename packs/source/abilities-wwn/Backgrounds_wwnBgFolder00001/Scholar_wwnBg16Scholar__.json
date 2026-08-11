@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg16Scholar__",
+  "name": "Scholar",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1600,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg16Scholar__"
+    }
+  },
+  "_key": "!items!wwnBg16Scholar__",
+  "system": {
+    "description": "",
+    "freeSkill": "Know-0",
+    "quickSkills": [
+      "Heal-0",
+      "Administer-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Mental",
+      "+2 Mental",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Administer",
+      "Heal",
+      "Craft",
+      "Know",
+      "Notice",
+      "Perform",
+      "Pray",
+      "Convince"
+    ],
+    "tableRoll": 16
+  },
+  "ownership": {
+    "default": 0
+  }
+}

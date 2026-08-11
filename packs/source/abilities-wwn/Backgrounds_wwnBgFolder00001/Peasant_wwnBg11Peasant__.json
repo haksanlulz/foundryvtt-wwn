@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg11Peasant__",
+  "name": "Peasant",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 1100,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg11Peasant__"
+    }
+  },
+  "_key": "!items!wwnBg11Peasant__",
+  "system": {
+    "description": "",
+    "freeSkill": "Exert-0",
+    "quickSkills": [
+      "Sneak-0",
+      "Survive-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Physical",
+      "+2 Physical",
+      "+2 Physical",
+      "Exert",
+      "Any Skill"
+    ],
+    "learning": [
+      "Connect",
+      "Exert",
+      "Craft",
+      "Notice",
+      "Sneak",
+      "Survive",
+      "Trade",
+      "Work"
+    ],
+    "tableRoll": 11
+  },
+  "ownership": {
+    "default": 0
+  }
+}

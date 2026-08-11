@@ -114,6 +114,19 @@ export function registerSettings() {
     choices: { wwn: "WWN.Setting.AttributeModWWN", bx: "WWN.Setting.AttributeModBX" },
   });
 
+  registerWwnSetting("attributeMethod", {
+    name: "WWN.Setting.AttributeMethod",
+    hint: "WWN.Setting.AttributeMethodHint",
+    scope: "world",
+    type: String,
+    default: "raw-order",
+    choices: {
+      "raw-order": "WWN.chargen.method.rawOrder",
+      "raw-array": "WWN.chargen.method.rawArray",
+      table: "WWN.chargen.method.table",
+    },
+  });
+
   registerWwnSetting("saveSet", {
     name: "WWN.Setting.SaveSet",
     hint: "WWN.Setting.SaveSetHint",

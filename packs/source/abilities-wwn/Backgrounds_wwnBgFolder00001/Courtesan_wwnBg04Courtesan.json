@@ -1,0 +1,45 @@
+{
+  "_id": "wwnBg04Courtesan",
+  "name": "Courtesan",
+  "type": "background",
+  "img": "systems/wwn/assets/icons/items/gear.png",
+  "effects": [],
+  "folder": "wwnBgFolder00001",
+  "sort": 400,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.wwn.abilities-wwn.wwnBg04Courtesan"
+    }
+  },
+  "_key": "!items!wwnBg04Courtesan",
+  "system": {
+    "description": "",
+    "freeSkill": "Perform-0",
+    "quickSkills": [
+      "Notice-0",
+      "Connect-0"
+    ],
+    "growth": [
+      "+1 Any Stat",
+      "+2 Mental",
+      "+2 Mental",
+      "+2 Physical",
+      "Connect",
+      "Any Skill"
+    ],
+    "learning": [
+      "Any Combat",
+      "Connect",
+      "Convince",
+      "Exert",
+      "Notice",
+      "Perform",
+      "Survive",
+      "Trade"
+    ],
+    "tableRoll": 4
+  },
+  "ownership": {
+    "default": 0
+  }
+}
