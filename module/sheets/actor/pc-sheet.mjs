@@ -6,6 +6,9 @@ import composeMixins from "../mixins/compose-mixins.mjs";
 import { CollapsibleSectionsMixin } from "../mixins/collapsible-sections.mjs";
 import { prepareXpBar } from "../helpers/resource-bar.mjs";
 import { maybeShowClassAssignmentDialog } from "../../dialog/class-assignment.mjs";
+import { WwnCharacterCreator } from "../../dialog/character-creation.js";
+import { showAdjustCurrencyDialog } from "../../dialog/adjust-currency.js";
+import { showCharacterModifiersDialog } from "../../dialog/character-modifiers.js";
 import { computeSkillPurchaseCost } from "../../helpers/skill-points.mjs";
 
 const TPL = "systems/wwn/templates/actor/pc";
@@ -118,30 +121,24 @@ export class WwnPcSheet extends composeMixins(CollapsibleSectionsMixin)(WwnBaseA
   /*  Actions                                     */
   /* -------------------------------------------- */
 
-  /** 3d6-in-order ability score generation for a fresh PC. */
+  /** Ability score generation for a fresh PC; method is chosen inside the dialog. */
   static #onGenerateScores() {
-    return import("../../dialog/character-creation.js").then(({ WwnCharacterCreator }) => {
-      new WwnCharacterCreator(this.actor, {
-        position: {
-          top: (this.position?.top ?? 0) + 40,
-          left: (this.position?.left ?? 0) + ((this.position?.width ?? 780) - 400) / 2,
-        },
-      }).render({ force: true });
-    });
+    return new WwnCharacterCreator(this.actor, {
+      position: {
+        top: (this.position?.top ?? 0) + 40,
+        left: (this.position?.left ?? 0) + ((this.position?.width ?? 780) - 400) / 2,
+      },
+    }).render({ force: true });
   }
 
   /** Currency adjustment dialog. */
   static #onAdjustCurrency() {
-    return import("../../dialog/adjust-currency.js").then(({ showAdjustCurrencyDialog }) => {
-      return showAdjustCurrencyDialog(this.actor);
-    });
+    return showAdjustCurrencyDialog(this.actor);
   }
 
   /** Show modifiers breakdown dialog. */
   static #onShowModifiers() {
-    return import("../../dialog/character-modifiers.js").then(({ showCharacterModifiersDialog }) => {
-      return showCharacterModifiersDialog(this.actor);
-    });
+    return showCharacterModifiersDialog(this.actor);
   }
 
   /** Bulk-add primary skills from the configured skill pack. */
